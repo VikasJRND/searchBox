@@ -9,23 +9,30 @@ class Filter extends Component {
       { id: 4, name: "Canada" }
     ],
     countryList: "",
-    List: ""
+    List: "",
+    filtedCounties: [
+      { id: 1, name: "Algeria" },
+      { id: 2, name: "Australia" },
+      { id: 3, name: "Belgium" },
+      { id: 4, name: "Canada" }
+    ]
   };
 
-  // handlechange = e => {
-  //   console.log("..........", this.state.compare);
+  handlechange = e => {
+    console.log(".............", this.state.countryList);
+    const newList = this.state.countries.filter(item => {
+      if (item.name.indexOf(e.target.value) > -1) {
+        return item;
+      }
+    });
 
-  //   const newList = this.state.todos.filter(item => {
-  //     return item.id !== id;
-  //   });
-
-  //   this.setState({
-  //     compare: e.target.value
-  //   });
-  // };
+    this.setState({
+      filtedCounties: newList
+    });
+  };
 
   render() {
-    const countryList = this.state.countries.map(item => {
+    const countryList = this.state.filtedCounties.map(item => {
       return (
         <div key={item.id}>
           <ul>
