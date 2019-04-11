@@ -35,7 +35,8 @@ class Filter extends Component {
     const countries = [...this.state.countries, newCountry];
     console.log("I am adding new counrty", countries);
     this.setState({
-      countries: countries
+      countries: countries,
+      ["newCountry"]: ""
     });
   };
   handlechange = e => {
@@ -50,9 +51,13 @@ class Filter extends Component {
     });
   };
 
-  allcountry = item => {
-    const allCountry = this.state.countries.map(country => {
-      return country;
+  deleteCountry = id => {
+    const countries = this.state.countries.filter(item => {
+      return item.id !== id;
+    });
+
+    this.setState({
+      countries: countries
     });
   };
 
@@ -68,7 +73,7 @@ class Filter extends Component {
     });
     const allCountry = this.state.countries.map(country => {
       return (
-        <div key={country.id}>
+        <div key={country.id} onClick={() => this.deleteCountry(country.id)}>
           <ul>
             <li>{country.name}</li>
           </ul>
@@ -103,6 +108,7 @@ class Filter extends Component {
             id="myInput"
             placeholder="Add country... "
             onChange={this.newcontry}
+            value={this.state.newCountry}
           />
           <button onClick={this.addCountry}>Submit</button>
         </div>
