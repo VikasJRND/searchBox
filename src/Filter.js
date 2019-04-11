@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 class Filter extends Component {
   state = {
+    singleCountry: "",
     countries: [
       { id: 1, name: "Algeria" },
       { id: 2, name: "Australia" },
@@ -18,8 +19,25 @@ class Filter extends Component {
     ]
   };
 
+  // newcontry = e => {
+  //   {
+  //     this.setState({
+  //       singleCountry: e.target.value
+  //     });
+  //   }
+
+  //   addCountry = e => {
+  //     const countries = this.state.countries.map(item => {
+  //       return item;
+  //     });
+
+  //     (countries = countries), this.state.singleCountry;
+  //     console.log("........", countries);
+  //     this.setState({ countries });
+  //   };
+  // };
+
   handlechange = e => {
-    console.log(".............", this.state.countryList);
     const newList = this.state.countries.filter(item => {
       if (item.name.indexOf(e.target.value) > -1) {
         return item;
@@ -44,23 +62,34 @@ class Filter extends Component {
 
     return (
       <div>
-        <input
-          type="text"
-          id="myInput"
-          onChange={this.handlechange}
-          placeholder="Search for names.."
-        />
+        <div>
+          <input
+            type="text"
+            id="myInput"
+            onChange={this.handlechange}
+            placeholder="Search for names.."
+          />
 
-        <table id="myTable">
-          <tbody>
-            <tr className="header">
-              <th>Name</th>
-            </tr>
-            <tr>
-              <td>{countryList}</td>
-            </tr>
-          </tbody>
-        </table>
+          <table id="myTable">
+            <tbody>
+              <tr className="header">
+                <th>Name</th>
+              </tr>
+              <tr>
+                <td>{countryList}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <input
+            type="text"
+            id="myInput"
+            placeholder="Add country... "
+            onChange={this.newcontry}
+          />
+          <button onClick={this.addCountry}>Submit</button>
+        </div>
       </div>
     );
   }
